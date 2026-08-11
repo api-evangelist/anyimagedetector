@@ -1,0 +1,49 @@
+generated: '2026-08-11'
+method: searched
+source: >-
+  Registry searches (npm, PyPI, RubyGems, crates.io, NuGet, Maven Central, pkg.go.dev,
+  Packagist) plus the provider's own API pages (https://imagedetector.online/api and
+  https://imagedetector.online/docs).
+description: >-
+  AnyImageDetector ships NO client libraries. The published reference documents the single
+  endpoint with raw cURL, Python `requests` and Node `fetch` + FormData snippets only — there is
+  no SDK, no CLI, and no package to install in any language. No GitHub organization exists for
+  the provider (api.github.com/orgs/anyimagedetector -> 404) and no first-party repository was
+  found. This is a recorded absence, not a gap in the search: no `SDKs` pointer is wired into
+  apis.yml because there is no official client library to point at.
+package_count: 0
+packages: []
+registries_searched:
+  - registry: npm
+    query: 'anyimagedetector, imagedetector.online'
+    result: no first-party package
+  - registry: pypi
+    query: 'anyimagedetector, imagedetector-online'
+    result: 404 on both
+  - registry: rubygems
+    result: no first-party package
+  - registry: crates.io
+    result: no first-party package
+  - registry: nuget
+    result: no first-party package
+  - registry: maven-central
+    result: no first-party package
+  - registry: pkg.go.dev
+    result: no first-party package
+  - registry: packagist
+    result: no first-party package
+  - registry: github
+    query: 'orgs/anyimagedetector; imagedetector.online in:readme,description'
+    result: >-
+      Org 404. Five unrelated third-party research repositories mention the domain; none is
+      first-party and none is a client library.
+code_samples_in_docs:
+  - language: shell
+    tool: curl
+    url: https://imagedetector.online/docs
+  - language: python
+    library: requests (generic HTTP client, not a provider SDK)
+    url: https://imagedetector.online/docs
+  - language: javascript
+    library: fetch + FormData (generic, not a provider SDK)
+    url: https://imagedetector.online/docs

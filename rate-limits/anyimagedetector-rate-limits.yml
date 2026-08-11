@@ -1,0 +1,56 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: AnyImageDetector
+providerId: anyimagedetector
+generated: '2026-08-11'
+method: searched
+source: https://imagedetector.online/docs
+docs: https://imagedetector.online/docs
+description: >-
+  AnyImageDetector publishes one hard rate limit: 1 request per second per API key, on the
+  single /v1/image/detect endpoint. Exceeding it returns 429 too_many_requests with a
+  Retry-After header in seconds. The Pro plan advertises a "higher rate limit" and Enterprise
+  advertises custom volume, but neither number is published — only the baseline is a stated
+  figure. Quota is separately enforced as monthly credits (see plans/).
+limit_count: 1
+headers:
+  requestId: null
+  rateLimitRemaining: null
+  rateLimitLimit: null
+  rateLimitReset: null
+  retryAfter: Retry-After
+  note: >-
+    Retry-After is the ONLY runtime rate-limit signal the provider documents. There are no
+    X-RateLimit-* or RFC 9239 RateLimit-* headers, so a client cannot see remaining budget
+    before it is exhausted — it can only react after a 429.
+responseCodes:
+  throttled: 429
+  throttledError: too_many_requests
+  quotaExhausted: 402
+  quotaExhaustedError: insufficient_credits
+limits:
+  - name: Detect requests per API key
+    scope: api-key
+    endpoint: POST /v1/image/detect
+    metric: requests_per_second
+    limit: 1
+    burst: null
+    timeFrame: second
+    tier: all published plans (baseline)
+    published_response: |
+      HTTP/1.1 429 Too Many Requests
+      Retry-After: 1
+    guidance: >-
+      "Implement exponential backoff on 429 responses. Need higher throughput? See pricing or
+      contact us about Enterprise limits."
+    source: https://imagedetector.online/docs
+undocumented:
+  - >-
+    The Pro plan's "Higher rate limit" is advertised on the pricing page with no number
+    attached, so the effective per-second ceiling on Pro is unknown to a buyer before purchase.
+  - >-
+    Enterprise "Custom volume" and SLA terms are not published.
+quotas:
+  note: >-
+    Monthly detection quota is a plan entitlement, not a rate limit; 1 credit per successful
+    detection, shared with the web tool. See plans/anyimagedetector-plans-pricing.yml.

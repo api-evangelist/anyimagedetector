@@ -1,0 +1,100 @@
+generated: '2026-08-11'
+method: derived
+source: >-
+  openapi/anyimagedetector-ai-image-detector-openapi.yml, enriched from the published
+  interpretation rules at https://imagedetector.online/methodology
+docs: https://imagedetector.online/methodology
+description: >-
+  The AI Image Detector API has no persistent object graph — no ids, no id prefixes, no
+  resources to fetch, list or relate. It is a stateless transform: an image goes in, a scored
+  judgement comes out. Two schemas exist and neither references the other. What IS worth
+  modelling is the SEMANTICS of the one returned object, because the provider publishes the
+  exact score bands that produce `verdict` and `confidence` — so a consumer can reproduce those
+  labels from `ai_score` alone, and can reason about the uncertain band rather than treating the
+  verdict as a black box.
+stateless: true
+identifier_scheme:
+  ids_returned: false
+  id_prefixes: []
+  note: >-
+    No detection id is returned, so a caller cannot reference, re-fetch or dispute a specific
+    result through the API. Signed-in users see results in a web "detection history"; there is
+    no API to read it.
+entities:
+  - name: DetectionResult
+    schema: DetectionResult
+    kind: value-object
+    persisted_for_caller: false
+    operations: [detectImage]
+    fields:
+      - name: verdict
+        type: string
+        enum: [likely_ai, likely_human, uncertain]
+        derived_from: ai_score
+      - name: ai_score
+        type: number
+        range: 0.0-1.0
+        description: Detected likelihood of AI generation. The primitive; everything else is a label on it.
+      - name: confidence
+        type: string
+        enum: [low, medium, high]
+        derived_from: distance of ai_score from the uncertain band
+      - name: source_breakdown
+        type: array
+        state: reserved
+        description: Documented as "reserved for future per-generator scores; currently always []".
+  - name: ImageInput
+    kind: request-payload
+    persisted: false
+    mutually_exclusive_fields: [image, imageUrl]
+    fields:
+      - name: image
+        type: file
+        constraints: JPG, PNG or WebP; max 8 MB; multipart/form-data
+      - name: imageUrl
+        type: string
+        constraints: publicly reachable HTTP/HTTPS URL; application/json
+    retention: >-
+      "The application does not add the submitted image file to detection history." Result data
+      (score, verdict) may persist for signed-in users; the image file does not.
+  - name: Error
+    schema: Error
+    kind: value-object
+    detail: errors/anyimagedetector-problem-types.yml
+relationships: []
+relationships_note: >-
+  None. No entity references another; there are no has_one/has_many/belongs_to links because
+  there are no identified resources.
+derivation_rules:
+  name: Verdict and confidence thresholds
+  source: https://imagedetector.online/methodology
+  published: true
+  note: >-
+    Published verbatim by the provider. These bands let a consumer recompute verdict and
+    confidence from ai_score, or apply its own stricter cutoff for a high-stakes workflow.
+  bands:
+    - ai_score_min: 0.75
+      ai_score_max: 1.00
+      verdict: likely_ai
+      confidence: high
+    - ai_score_min: 0.55
+      ai_score_max: 0.74
+      verdict: likely_ai
+      confidence: medium
+    - ai_score_min: 0.46
+      ai_score_max: 0.54
+      verdict: uncertain
+      confidence: low
+    - ai_score_min: 0.26
+      ai_score_max: 0.45
+      verdict: likely_human
+      confidence: medium
+    - ai_score_min: 0.00
+      ai_score_max: 0.25
+      verdict: likely_human
+      confidence: high
+  caveat: >-
+    The provider states these thresholds "make the output easier to interpret; they do not turn
+    a probabilistic result into certainty," and instructs that a single detector score must not
+    be the sole basis for disciplinary action, legal claims, payment refusal, account suspension
+    or public accusations.

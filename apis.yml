@@ -1,9 +1,19 @@
 name: AnyImageDetector
 description: >-
-  A single-purpose AI-image-detection service. The AI Image Detector API exposes a single REST endpoint that reports
-  whether an image is AI-generated, returning a verdict, a probability score, a confidence level, and an optional
-  per-generator breakdown.
+  AnyImageDetector (imagedetector.online) is a single-purpose AI-image-detection service for
+  individuals, trust-and-safety reviewers, journalists and developers. Its AI Image Detector API
+  exposes one REST endpoint, POST /v1/image/detect, that accepts a JPG/PNG/WebP file up to 8 MB
+  or a public image URL and returns a verdict (likely_ai, likely_human or uncertain), an
+  ai_score from 0 to 1, a confidence label, and a source_breakdown array reserved for future
+  per-generator scores. The provider publishes the exact score bands that map ai_score to
+  verdict and confidence, and deliberately declines to publish a single accuracy percentage,
+  stating that one number would hide differences between generators, image styles, resolutions
+  and editing conditions. Authentication is a static sk_ API key sent as a Bearer token or an
+  x-api-key header; API access requires a paid plan and each successful detection consumes one
+  credit from the same balance as the web tool. Requests are limited to one per second per key,
+  with Retry-After returned on 429.
 url: https://anyimagedetector.apievangelist.com/apis.yml
+image: https://imagedetector.online/og-image.png
 created: '2026-08-11'
 modified: '2026-08-11'
 specificationVersion: '0.21'
@@ -16,12 +26,16 @@ tags:
   - fact-checking
   - media verification
   - developer tools
+  - synthetic media
+  - fraud prevention
 apis:
   - name: AI Image Detector API
     description: >-
-      REST API with a single endpoint (POST /v1/image/detect) that detects whether an image is AI-generated. Accepts a
-      multipart file upload or a JSON body with a public image URL, and returns verdict, ai_score, confidence, and
-      source_breakdown. Requires a paid account and Bearer/x-api-key authentication.
+      REST API with a single endpoint (POST /v1/image/detect) that detects whether an image is
+      AI-generated. Accepts a multipart file upload (JPG, PNG or WebP, up to 8 MB) or a JSON
+      body with a public image URL, and returns verdict, ai_score, confidence, and
+      source_breakdown. Requires a paid account and Bearer/x-api-key authentication; one
+      credit per successful detection; one request per second per API key.
     humanURL: https://imagedetector.online/api
     baseURL: https://imagedetector.online/v1
     tags:
@@ -36,11 +50,74 @@ apis:
     properties:
       - type: Documentation
         url: https://imagedetector.online/docs
+      - type: APIReference
+        url: https://imagedetector.online/docs
+      - type: OpenAPI
+        url: openapi/anyimagedetector-ai-image-detector-openapi.yml
+      - type: DataModel
+        url: data-model/anyimagedetector-data-model.yml
+      - type: ErrorCatalog
+        url: errors/anyimagedetector-problem-types.yml
 maintainers:
   - FN: imagedetector.online
     url: https://imagedetector.online
+    email: support@imagedetector.online
 generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 85
   at: '2026-08-11T07:10:19.945Z'
+common:
+- type: DomainSecurity
+  url: security/anyimagedetector-domain-security.yml
+- type: DeveloperPortal
+  url: https://imagedetector.online/api
+- type: Documentation
+  url: https://imagedetector.online/docs
+- type: APIReference
+  url: https://imagedetector.online/docs
+- type: Support
+  url: mailto:support@imagedetector.online
+- type: Blog
+  url: https://imagedetector.online/blog
+- type: Pricing
+  url: https://imagedetector.online/pricing
+- type: SignUp
+  url: https://imagedetector.online/sign-up
+- type: Login
+  url: https://imagedetector.online/sign-in
+- type: TermsOfService
+  url: https://imagedetector.online/terms-of-service
+- type: PrivacyPolicy
+  url: https://imagedetector.online/privacy-policy
+- type: Methodology
+  url: https://imagedetector.online/methodology
+- type: Limitations
+  url: https://imagedetector.online/accuracy-and-limitations
+- type: About
+  url: https://imagedetector.online/about
+- type: LLMsTxt
+  url: llms/anyimagedetector-llms.txt
+- type: Authentication
+  url: authentication/anyimagedetector-authentication.yml
+- type: ErrorCatalog
+  url: errors/anyimagedetector-problem-types.yml
+- type: RateLimits
+  url: rate-limits/anyimagedetector-rate-limits.yml
+- type: Plans
+  url: plans/anyimagedetector-plans-pricing.yml
+- type: Conventions
+  url: conventions/anyimagedetector-conventions.yml
+- type: Lifecycle
+  url: lifecycle/anyimagedetector-lifecycle.yml
+- type: Conformance
+  url: conformance/anyimagedetector-conformance.yml
+- type: DataModel
+  url: data-model/anyimagedetector-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-08-11'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

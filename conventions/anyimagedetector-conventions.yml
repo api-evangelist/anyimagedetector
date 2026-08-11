@@ -1,0 +1,115 @@
+generated: '2026-08-11'
+method: searched
+source: https://imagedetector.online/docs
+docs: https://imagedetector.online/docs
+description: >-
+  Cross-cutting runtime semantics for the AI Image Detector API — the behaviours that apply to
+  every call rather than to one operation. The surface is deliberately small (one POST endpoint,
+  no collections, no object graph), so several conventions that mature APIs carry are simply
+  absent here rather than undocumented; each is recorded below with which of the two it is.
+base_url: https://imagedetector.online/v1
+api_style: REST over HTTPS, multipart/form-data OR application/json request, JSON response
+
+authentication:
+  scheme: Static API key as HTTP Bearer token, or the x-api-key header (one of the two)
+  key_prefix: sk_
+  docs: https://imagedetector.online/docs
+  detail: authentication/anyimagedetector-authentication.yml
+
+idempotency:
+  supported: false
+  mechanism: none
+  note: >-
+    No Idempotency-Key header, no request-id echo, no de-duplication window is documented. The
+    single operation is a paid, credit-consuming POST, so a client that retries a request whose
+    response it never saw has no way to avoid being billed twice for the same image. This is the
+    single most consequential runtime gap on this API and the reason no `Idempotency` pointer is
+    wired into apis.yml.
+  status: ABSENT — not merely undocumented
+
+pagination:
+  supported: false
+  reason: not-applicable
+  note: The API exposes one non-collection operation; there is nothing to page.
+
+field_expansion:
+  supported: false
+  reason: not-applicable
+
+sparse_fields:
+  supported: false
+  reason: not-applicable
+
+metadata:
+  supported: false
+  note: No caller-supplied metadata field is accepted or echoed on the detection result.
+
+request_tracing:
+  supported: false
+  request_id_header: null
+  note: >-
+    No request/correlation id is documented on any response. Cloudflare's cf-ray header is
+    present on live responses as an edge artifact, but the provider does not document it as a
+    support identifier.
+
+versioning:
+  style: URI path
+  current: v1
+  header_versioning: false
+  date_versioning: false
+  note: >-
+    "All endpoints are served over HTTPS and versioned with a /v1 path prefix." No version
+    negotiation header, no dated versions, no published policy for how v2 would be introduced.
+  detail: lifecycle/anyimagedetector-lifecycle.yml
+
+error_envelope:
+  media_type: application/json
+  shape: '{ "error": string, "message": string }'
+  rfc9457: false
+  codes: 7 (closed set)
+  detail: errors/anyimagedetector-problem-types.yml
+
+rate_limit_signaling:
+  limit: 1 request per second per API key
+  exhaustion_status: 429
+  exhaustion_code: too_many_requests
+  headers_returned: [Retry-After]
+  proactive_headers: none
+  note: >-
+    Retry-After is the only signal. There are no X-RateLimit-* or RFC 9239 RateLimit-* headers,
+    so an agent cannot budget ahead of a 429 — it can only back off after one.
+  guidance: Provider explicitly recommends exponential backoff on 429.
+  detail: rate-limits/anyimagedetector-rate-limits.yml
+
+quota_semantics:
+  unit: 1 credit per successful detection
+  shared_balance: true (same balance as the web tool)
+  exhaustion_status: 402
+  exhaustion_code: insufficient_credits
+  detail: plans/anyimagedetector-plans-pricing.yml
+
+content_negotiation:
+  request: multipart/form-data (file) or application/json (imageUrl) — exactly one per request
+  response: application/json only
+  input_constraints:
+    formats: [JPG, PNG, WebP]
+    max_size: 8 MB
+    url_requirement: publicly reachable over HTTP/HTTPS
+
+webhooks:
+  supported: false
+  note: >-
+    Detection is synchronous; there is no callback, no event stream and no async job model, so
+    there is no AsyncAPI or webhook catalog to capture.
+
+data_handling:
+  image_retention: >-
+    "Submitted image files are not added to your detection history." Result metadata (score,
+    verdict) may be retained for signed-in users until deleted through account controls.
+  subprocessors: >-
+    Privacy policy states submitted image content may be transmitted over an encrypted
+    connection to "contracted processing services" to perform the detection — i.e. detection is
+    at least partly performed by an unnamed third party. Combined with the documented 503
+    `unavailable` ("Detection provider not configured"), the API is a wrapper over an upstream
+    detection provider that the provider does not name.
+  source: https://imagedetector.online/privacy-policy

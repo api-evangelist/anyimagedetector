@@ -1,0 +1,14 @@
+# AnyImageDetector
+
+> Free AI image detector — check whether an image is AI-generated.
+
+## Pages
+
+- [Home](https://imagedetector.online): Landing page
+- [Pricing](https://imagedetector.online/pricing): Pricing plans
+- [Blog](https://imagedetector.online/blog): Blog posts and articles
+
+## Blog Posts
+
+- [How Do AI Image Detectors Work?](https://imagedetector.online/blog/how-do-ai-image-detectors-work): How AI image detectors work, what signals they analyze, why results can be uncertain, and how to use an AI image checker responsibly.
+- [How to Check if an Image Is AI-Generated](https://imagedetector.online/blog/how-to-check-if-image-is-ai-generated): How to check if an image is AI-generated: what an AI image detector looks for, how to spot Midjourney, Stable Diffusion, and DALL·E output in seconds.

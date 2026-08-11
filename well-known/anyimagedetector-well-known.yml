@@ -1,0 +1,73 @@
+generated: '2026-08-11'
+method: probed
+host: https://imagedetector.online
+description: >-
+  Probe of the RFC 8615 /.well-known/ discovery surface on the only host AnyImageDetector
+  operates (imagedetector.online — the website, the docs and the API base all share it; no
+  api./docs./status. subdomain resolves). EVERY documented path returned 404. The site is a
+  Next.js application behind Cloudflare and serves an HTML 404 shell for unknown paths, so the
+  bodies below are the site's HTML not-found page, not documents.
+  RECORDED ABSENCE, NOT A PRESENCE: no `WellKnown` and no `SecurityTxt` pointer is wired into
+  apis.yml, because the provider serves none of these documents.
+documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+adjacent_root_documents:
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/anyimagedetector-llms.txt
+    note: Provider-published. Saved verbatim; wired as type LLMsTxt.
+  - path: /llms-full.txt
+    status: 200
+    content_type: text/plain
+    file: null
+    note: >-
+      Provider-published and near-identical to /llms.txt (857 bytes vs 811 — it expands the two
+      blog entries). Deliberately not committed; *-llms-full.txt is gitignored network-wide.
+  - path: /robots.txt
+    status: 200
+    content_type: text/plain
+    file: null
+    note: >-
+      Carries Cloudflare-managed Content Signals (search=yes, ai-train=no, use=reference) and
+      explicitly Disallows Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot,
+      Google-Extended, GPTBot and meta-externalagent. Also Disallows /api/ (the API base path)
+      and /admin, /settings, and any URL with a query string.
+  - path: /sitemap.xml
+    status: 200
+    content_type: application/xml
+    file: null
+    note: 14 English URLs plus Chinese (/zh) alternates.
+hosts_probed:
+  - host: imagedetector.online
+    resolves: true
+  - host: api.imagedetector.online
+    resolves: false
+  - host: docs.imagedetector.online
+    resolves: false
+  - host: status.imagedetector.online
+    resolves: false
+  - host: anyimagedetector.com
+    resolves: false
+  - host: anyimagedetector.online
+    resolves: false

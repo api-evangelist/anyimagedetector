@@ -1,0 +1,90 @@
+generated: '2026-08-11'
+method: searched
+source: https://imagedetector.online/docs
+docs: https://imagedetector.online/docs
+format: custom-json
+rfc9457: false
+description: >-
+  The complete published error catalog for the AI Image Detector API. AnyImageDetector publishes
+  a flat, closed set of seven machine-readable error codes covering the single endpoint. It does
+  NOT use RFC 9457 application/problem+json: errors return application/json with a two-field
+  envelope, so there is no `type` URI, no `title`, no `instance` and no problem registry.
+envelope:
+  media_type: application/json
+  shape: '{ "error": string, "message": string }'
+  published_example: '{ "error": "insufficient_credits", "message": "Insufficient credits" }'
+  fields:
+    - name: error
+      type: string
+      required: true
+      description: Machine-readable error code from the closed set below.
+    - name: message
+      type: string
+      required: true
+      description: Human-readable message.
+problem_count: 7
+problems:
+  - code: bad_request
+    status: 400
+    title: Bad request
+    meaning: Missing or invalid image, URL, or format.
+    remediation: >-
+      Send exactly one of `image` (multipart file) or `imageUrl` (JSON). Confirm the file is
+      JPG, PNG or WebP and under 8 MB, and that any imageUrl is publicly reachable over
+      HTTP/HTTPS.
+    retryable: false
+  - code: unauthorized
+    status: 401
+    title: Unauthorized
+    meaning: Missing or invalid API key.
+    remediation: >-
+      Send Authorization: Bearer sk_... or x-api-key: sk_... (one, not both). Keys are shown only
+      once at creation; regenerate in Settings -> API Keys if lost.
+    retryable: false
+    observed_live: true
+  - code: insufficient_credits
+    status: 402
+    title: Insufficient credits
+    meaning: Out of credits.
+    remediation: >-
+      Each successful detection costs 1 credit from the balance shared with the web tool.
+      Upgrade the plan or wait for the monthly allowance to reset.
+    retryable: false
+  - code: paid_plan_required
+    status: 403
+    title: Paid plan required
+    meaning: API access requires a paid plan.
+    remediation: >-
+      The free tier is web-only. Move to Basic or above (see plans/anyimagedetector-plans-pricing.yml)
+      before calling /v1 endpoints.
+    retryable: false
+  - code: too_many_requests
+    status: 429
+    title: Too many requests
+    meaning: Rate limit exceeded — 1 request per second per API key.
+    remediation: >-
+      Honor the Retry-After response header (in seconds) and implement exponential backoff, as
+      the docs instruct. Higher throughput requires the Pro plan or an Enterprise agreement.
+    retryable: true
+    response_headers: [Retry-After]
+  - code: detection_failed
+    status: 500
+    title: Detection failed
+    meaning: Unexpected provider error.
+    remediation: Retry with backoff; if persistent, contact support@imagedetector.online.
+    retryable: true
+  - code: unavailable
+    status: 503
+    title: Unavailable
+    meaning: Detection provider not configured.
+    remediation: >-
+      Upstream detection service is not available. Retry later; there is no status page to check
+      (status.imagedetector.online does not resolve).
+    retryable: true
+gaps:
+  - >-
+    No error `type` URI, `title` or `instance` — the envelope is not RFC 9457, so an agent
+    cannot dereference a problem type for machine-readable remediation.
+  - >-
+    No request/correlation id is documented on any response, so a caller has nothing to quote to
+    support when reporting a 500 detection_failed.

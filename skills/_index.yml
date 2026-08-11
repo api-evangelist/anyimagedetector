@@ -1,0 +1,22 @@
+generated: '2026-08-11'
+method: generated
+source: >-
+  Authored by API Evangelist from openapi/anyimagedetector-ai-image-detector-openapi.yml and the
+  provider's published docs, methodology and accuracy pages. AnyImageDetector publishes no
+  skills, no AGENTS.md and no agent guidance of its own (searched; none found).
+description: >-
+  Packaged Agent Skills for the AnyImageDetector AI Image Detector API. The API has a single
+  operation, so there is a single marquee flow — but the flow is not the interesting part: the
+  interpretation and refusal rules are, and they are what the skill encodes.
+skill_count: 1
+skills:
+  - name: anyimagedetector-detect-ai-image
+    file: anyimagedetector-detect-ai-image.md
+    title: Detect whether an image is AI-generated
+    api: AI Image Detector API
+    operations: [detectImage]
+    summary: >-
+      Authenticate with an sk_ API key, POST an image file or public image URL to
+      /v1/image/detect, map ai_score to the provider's published verdict/confidence bands,
+      handle the seven documented error codes and the 1 rps limit, and report the result with
+      the uncertainty and use-restrictions the provider requires.

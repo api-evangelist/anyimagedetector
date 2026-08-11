@@ -1,0 +1,77 @@
+generated: '2026-08-11'
+method: searched
+source: https://imagedetector.online/docs
+docs: https://imagedetector.online/docs
+description: >-
+  Versioning, change, deprecation, availability and support posture for the AI Image Detector
+  API. What is published is thin: a URI version prefix and a "Last updated" date on the docs
+  page. There is no changelog, no status page, no deprecation policy, no SLA outside an
+  Enterprise agreement, and no announced end-of-life mechanism. Every absence below was probed,
+  not assumed.
+versioning:
+  style: URI path prefix
+  current_version: v1
+  documented: true
+  quote: 'All endpoints are served over HTTPS and versioned with a /v1 path prefix.'
+  version_negotiation: none
+  breaking_change_policy: not published
+  source: https://imagedetector.online/docs
+change_log:
+  published: false
+  probe:
+    url: https://imagedetector.online/changelog
+    status: 404
+  proxy_signal:
+    docs_last_updated: '2026-07-16'
+    about_last_updated: '2026-07-20'
+    privacy_last_updated: '2026-07-20'
+    terms_last_updated: '2026-05-21'
+    note: >-
+      Each published page carries its own "Last updated" date. That is the only dated change
+      signal on the service; it is not a changelog and does not say what changed.
+deprecation:
+  policy_published: false
+  sunset_header: not documented
+  deprecation_header: not documented
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No RFC 8594 Sunset/Deprecation header contract, no deprecation page, and no notice period is
+    stated. The Terms of Service reserve the right to "modify, suspend, or discontinue any part
+    of the service at any time, with reasonable notice where possible" — a discretionary clause,
+    not a deprecation policy.
+  source: https://imagedetector.online/terms-of-service
+status_page:
+  published: false
+  probes:
+    - url: https://status.imagedetector.online/
+      status: 000
+      note: host does not resolve
+    - url: https://imagedetector.online/status
+      status: 404
+  note: >-
+    There is no status page, which matters because the documented 503 `unavailable` error means
+    the upstream detection provider is not configured — a caller has nowhere to check whether an
+    outage is theirs or the provider's.
+sla:
+  published: false
+  note: >-
+    An SLA is listed as an Enterprise-tier feature on the pricing page but no terms, uptime
+    target or credit schedule is published for any tier.
+  source: https://imagedetector.online/pricing
+support:
+  channels:
+    - type: email
+      value: support@imagedetector.online
+      tiers: Basic and above (Email support / Priority support)
+  ticketing: not published
+  community: none
+maturity:
+  stage: production
+  api_age_signal: >-
+    Copyright 2026; docs page dated 2026-07-16. A young, single-endpoint service.
+  reserved_surface:
+    - >-
+      `source_breakdown` is documented as "Reserved for future per-generator scores; currently
+      always []" — a declared-but-unimplemented response field, published in the contract ahead
+      of the capability.

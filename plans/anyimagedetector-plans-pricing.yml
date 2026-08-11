@@ -1,0 +1,117 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: AnyImageDetector
+providerId: anyimagedetector
+generated: '2026-08-11'
+method: searched
+source: https://imagedetector.online/pricing
+docs: https://imagedetector.online/pricing
+currency: USD
+description: >-
+  AnyImageDetector prices in monthly detection allowances, sold as four self-service tiers plus
+  a contact-sales Enterprise tier. The unit is one image detection = 1 credit, drawn from a
+  single balance shared between the web tool and the API. API ACCESS IS A PAID FEATURE: the
+  Free tier is web-only and cannot create API keys, which the API reference states explicitly.
+  Annual billing is offered at a flat 20% discount on every paid tier.
+access_model:
+  pricing: paid
+  free_tier: true
+  free_tier_api_access: false
+  onboarding: self-service (paid plan required before an API key can be created)
+plan_count: 5
+plans:
+  - id: free
+    name: Free
+    type: free
+    price_monthly: 0
+    price_annual: 0
+    currency: USD
+    billing_period: none
+    included_quota: 10 images (one-time trial allowance, not monthly)
+    unit: image detection
+    api_access: false
+    features:
+      - Confidence score
+    note: Explicitly cannot create API keys or call /v1 endpoints.
+  - id: basic
+    name: Basic
+    type: subscription
+    price_monthly: 3.19
+    price_annual: 38.30
+    currency: USD
+    billing_period: month
+    annual_discount: 20%
+    included_quota: 100 images/month
+    unit: image detection
+    effective_unit_price_monthly: 0.0319
+    api_access: true
+    features:
+      - Confidence score
+      - API access
+      - Email support
+    positioning: For light use
+  - id: advanced
+    name: Advanced
+    type: subscription
+    price_monthly: 28
+    price_annual: 336
+    currency: USD
+    billing_period: month
+    annual_discount: 20%
+    included_quota: 1000 images/month
+    unit: image detection
+    effective_unit_price_monthly: 0.028
+    api_access: true
+    popular: true
+    features:
+      - Confidence score
+      - Detection history
+      - API access
+      - Priority support
+    positioning: For regular use
+  - id: pro
+    name: Pro
+    type: subscription
+    price_monthly: 240
+    price_annual: 2880
+    currency: USD
+    billing_period: month
+    annual_discount: 20%
+    included_quota: 10000 images/month
+    unit: image detection
+    effective_unit_price_monthly: 0.024
+    api_access: true
+    features:
+      - Confidence score
+      - Detection history
+      - API access
+      - Higher rate limit
+    positioning: For growing teams
+    note: >-
+      "Higher rate limit" is advertised without a number; the published baseline of 1 req/sec
+      per key is the only stated figure anywhere.
+  - id: enterprise
+    name: Enterprise
+    type: contact-sales
+    price_monthly: null
+    price_annual: null
+    currency: USD
+    billing_period: null
+    included_quota: custom volume
+    api_access: true
+    features:
+      - Custom volume
+      - SLA
+      - Private processing
+    positioning: For large organizations
+overage:
+  policy: not published
+  note: >-
+    The pricing FAQ poses "What happens if I run out of checks mid-month?" but the answer is not
+    exposed in the served HTML. The API's own behaviour on exhaustion is documented: 402
+    insufficient_credits. No published overage rate.
+refunds:
+  policy: >-
+    Terms of Service state refunds are "handled on a case-by-case basis in line with our refund
+    policy"; no standalone refund policy page is published.
+  source: https://imagedetector.online/terms-of-service
