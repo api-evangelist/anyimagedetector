@@ -68,6 +68,8 @@ generated:
   confidence: 85
   at: '2026-08-11T07:10:19.945Z'
 common:
+- type: MCPServer
+  url: mcp/anyimagedetector-mcp.yml
 - type: DomainSecurity
   url: security/anyimagedetector-domain-security.yml
 - type: DeveloperPortal
