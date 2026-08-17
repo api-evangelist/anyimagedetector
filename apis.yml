@@ -12,7 +12,7 @@ description: >-
   x-api-key header; API access requires a paid plan and each successful detection consumes one
   credit from the same balance as the web tool. Requests are limited to one per second per key,
   with Retry-After returned on 429.
-url: https://anyimagedetector.apievangelist.com/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/anyimagedetector/refs/heads/main/apis.yml
 image: https://imagedetector.online/og-image.png
 created: '2026-08-11'
 modified: '2026-08-11'
