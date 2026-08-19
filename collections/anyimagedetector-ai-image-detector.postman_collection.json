@@ -1,0 +1,553 @@
+{
+  "item": [
+    {
+      "id": "f290bd83-df44-48fa-b25b-2312e503dfcc",
+      "name": "Detection",
+      "description": {
+        "content": "Analyze an image and report whether it is AI-generated.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23523076-dc1e-4971-afb4-0d54865dd1a4",
+          "name": "Detect whether an image is AI-generated",
+          "request": {
+            "name": "Detect whether an image is AI-generated",
+            "description": {
+              "content": "Send EITHER a multipart file upload OR a JSON body containing a public image URL. Provide exactly one of `image` or `imageUrl` per request. A successful detection costs 1 credit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "image",
+                "detect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "description": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f5ec5097-00ef-4902-9ddb-cd28e475fcfa",
+              "name": "Detection result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"verdict\": \"likely_ai\",\n  \"ai_score\": 0.87,\n  \"confidence\": \"high\",\n  \"source_breakdown\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7121abf-a745-4a29-ad04-cfdda3a2cd82",
+              "name": "bad_request — Missing or invalid image, URL, or format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Missing or invalid image, URL, or format\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c21d82b-d645-4b20-baf1-d50a324975ef",
+              "name": "unauthorized — Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Missing API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7d32b22-a339-430c-b20e-94e5de49db26",
+              "name": "insufficient_credits — Out of credits; upgrade your plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"insufficient_credits\",\n  \"message\": \"Insufficient credits\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf75ee9f-ccf0-4064-9868-aa00368d5475",
+              "name": "paid_plan_required — API access requires a paid plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"paid_plan_required\",\n  \"message\": \"API access requires a paid plan\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c2fe765-b7cd-4c8a-afcf-356274506537",
+              "name": "too_many_requests — Rate limit exceeded (1 request per second per API key). Retry after the number of seconds given in the Retry-After header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"too_many_requests\",\n  \"message\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90d19918-fb03-4b49-a11d-bb3a7a3b02dc",
+              "name": "detection_failed — Unexpected provider error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"detection_failed\",\n  \"message\": \"Unexpected provider error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc8a38cc-2cbd-41ca-a2b4-faec477fc8df",
+              "name": "unavailable — Detection provider not configured.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to analyze. JPG, PNG or WebP, up to 8 MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unavailable\",\n  \"message\": \"Detection provider not configured\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://imagedetector.online/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1d23a4b0-4ba8-4e3c-a9e7-32d8f59ab58a",
+    "name": "AI Image Detector API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AI Image Detector API exposes a single endpoint that reports whether an image is AI-generated. It returns a verdict, a probability score (0-1), a confidence label, and a per-generator breakdown field that is reserved for future use.\n\nPROVENANCE — READ THIS FIRST. AnyImageDetector (imagedetector.online) publishes NO OpenAPI, Swagger, GraphQL, AsyncAPI or Postman artifact. This document is TRANSCRIBED, not harvested. Every path, header, parameter, constraint, response field, enum value, error code and rate limit below is copied verbatim from the provider's own published API reference at https://imagedetector.online/docs (page states \"Last updated: 2026-07-16\") and the API overview at https://imagedetector.online/api. Nothing is inferred or invented. The single operation was additionally probed live and anonymously on 2026-08-11; the observed status and body are recorded in `x-evidence` on the operation.\n\nACCESS: a paid plan is required. API keys are created in Settings -> API Keys and are only shown once at creation. Free accounts and unauthenticated guests cannot create API keys or call /v1 endpoints. Each successful detection costs 1 credit, drawn from the same balance as the web tool.\n\nContact Support:\n Name: AnyImageDetector Support\n Email: support@imagedetector.online",
+      "type": "text/plain"
+    }
+  }
+}

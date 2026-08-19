@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AI Image Detector API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Detection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect whether an image is AI-generated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://imagedetector.online/v1/image/detect",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send EITHER a multipart file upload OR a JSON body containing a public image URL. Provide exactly one of `image` or `imageUrl` per request. A successful detection costs 1 credit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
