@@ -16,7 +16,7 @@ url: https://raw.githubusercontent.com/api-evangelist/anyimagedetector/refs/head
 image: https://imagedetector.online/og-image.png
 created: '2026-08-11'
 modified: '2026-08-11'
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 tags:
   - AI image detection
   - image analysis
