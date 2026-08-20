@@ -19,6 +19,17 @@ modified: '2026-08-11'
 specificationVersion: '0.23'
 tags:
   - AI image detection
+  - Image Analysis
+  - Computer-Vision
+  - Content Moderation
+  - Trust and Safety
+  - Fact Checking
+  - media verification
+  - Developer Tools
+  - Synthetic Media
+  - Fraud Prevention
+tags_raw:
+  - AI image detection
   - image analysis
   - computer vision
   - content moderation
@@ -39,6 +50,15 @@ apis:
     humanURL: https://imagedetector.online/api
     baseURL: https://imagedetector.online/v1
     tags:
+      - AI image detection
+      - Image Analysis
+      - Computer-Vision
+      - Content Moderation
+      - Trust and Safety
+      - Fact Checking
+      - media verification
+      - Developer Tools
+    tags_raw:
       - AI image detection
       - image analysis
       - computer vision
