@@ -40,44 +40,24 @@ tags_raw:
   - synthetic media
   - fraud prevention
 apis:
-  - name: AI Image Detector API
-    description: >-
-      REST API with a single endpoint (POST /v1/image/detect) that detects whether an image is
-      AI-generated. Accepts a multipart file upload (JPG, PNG or WebP, up to 8 MB) or a JSON
-      body with a public image URL, and returns verdict, ai_score, confidence, and
-      source_breakdown. Requires a paid account and Bearer/x-api-key authentication; one
-      credit per successful detection; one request per second per API key.
-    humanURL: https://imagedetector.online/api
-    baseURL: https://imagedetector.online/v1
-    tags:
-      - AI image detection
-      - Image Analysis
-      - Computer-Vision
-      - Content Moderation
-      - Trust and Safety
-      - Fact Checking
-      - media verification
-      - Developer Tools
-    tags_raw:
-      - AI image detection
-      - image analysis
-      - computer vision
-      - content moderation
-      - trust & safety
-      - fact-checking
-      - media verification
-      - developer tools
-    properties:
-      - type: Documentation
-        url: https://imagedetector.online/docs
-      - type: APIReference
-        url: https://imagedetector.online/docs
-      - type: OpenAPI
-        url: openapi/anyimagedetector-ai-image-detector-openapi.yml
-      - type: DataModel
-        url: data-model/anyimagedetector-data-model.yml
-      - type: ErrorCatalog
-        url: errors/anyimagedetector-problem-types.yml
+- aid: anyimagedetector:anyimagedetector-detection-api
+  name: AnyImageDetector Detection API
+  description: Analyze an image and report whether it is AI-generated.
+  humanURL: https://imagedetector.online/api
+  baseURL: https://imagedetector.online/v1
+  tags:
+  - Detection
+  properties:
+  - type: OpenAPI
+    url: openapi/anyimagedetector-detection-api-openapi.yml
+  - type: Documentation
+    url: https://imagedetector.online/docs
+  - type: APIReference
+    url: https://imagedetector.online/docs
+  - type: DataModel
+    url: data-model/anyimagedetector-data-model.yml
+  - type: ErrorCatalog
+    url: errors/anyimagedetector-problem-types.yml
 maintainers:
   - FN: imagedetector.online
     url: https://imagedetector.online
