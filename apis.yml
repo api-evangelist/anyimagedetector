@@ -13,6 +13,18 @@ description: >-
   credit from the same balance as the web tool. Requests are limited to one per second per key,
   with Retry-After returned on 429.
 url: https://raw.githubusercontent.com/api-evangelist/anyimagedetector/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://imagedetector.online/og-image.png
 created: '2026-08-11'
 modified: '2026-08-11'
