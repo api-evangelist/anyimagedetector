@@ -31,15 +31,15 @@ modified: '2026-08-11'
 specificationVersion: '0.23'
 tags:
   - AI image detection
-  - Image Analysis
+  - image analysis
   - Computer-Vision
   - Content Moderation
-  - Trust and Safety
-  - Fact Checking
+  - trust & safety
+  - fact-checking
   - media verification
   - Developer Tools
-  - Synthetic Media
-  - Fraud Prevention
+  - synthetic media
+  - fraud prevention
 tags_raw:
   - AI image detection
   - image analysis
