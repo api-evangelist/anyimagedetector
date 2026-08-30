@@ -1,0 +1,251 @@
+openapi: 3.2.0
+info:
+  title: AI Image Detector Detection API
+  version: v1
+  summary: Single-endpoint REST API that reports whether an image is AI-generated.
+  description: 'The AI Image Detector API exposes a single endpoint that reports whether an image is AI-generated. It returns a verdict, a probability score (0-1), a confidence label, and a per-generator breakdown field that is reserved for future use.
+
+
+    PROVENANCE — READ THIS FIRST. AnyImageDetector (imagedetector.online) publishes NO OpenAPI, Swagger, GraphQL, AsyncAPI or Postman artifact. This document is TRANSCRIBED, not harvested. Every path, header, parameter, constraint, response field, enum value, error code and rate limit below is copied verbatim from the provider''s own published API reference at https://imagedetector.online/docs (page states "Last updated: 2026-07-16") and the API overview at https://imagedetector.online/api. Nothing is inferred or invented. The single operation was additionally probed live and anonymously on 2026-08-11; the observed status and body are recorded in `x-evidence` on the operation.
+
+
+    ACCESS: a paid plan is required. API keys are created in Settings -> API Keys and are only shown once at creation. Free accounts and unauthenticated guests cannot create API keys or call /v1 endpoints. Each successful detection costs 1 credit, drawn from the same balance as the web tool.'
+  contact:
+    name: AnyImageDetector Support
+    email: support@imagedetector.online
+    url: https://imagedetector.online/api
+  termsOfService: https://imagedetector.online/terms-of-service
+  x-provenance:
+    generated: '2026-08-11'
+    method: derived
+    derivation: transcribed-from-published-reference
+    source: https://imagedetector.online/docs
+    additional_sources:
+    - https://imagedetector.online/api
+    - https://imagedetector.online/pricing
+    published_by_provider: false
+    note: Authored by API Evangelist from the provider's published HTML reference. It is NOT a provider-published contract and carries no support commitment from AnyImageDetector.
+servers:
+- url: https://imagedetector.online/v1
+  description: Production. HTTPS only, versioned with a /v1 path prefix.
+security:
+- BearerAuth: []
+- ApiKeyHeader: []
+tags:
+- name: Detection
+  description: Analyze an image and report whether it is AI-generated.
+paths:
+  /image/detect:
+    post:
+      tags:
+      - Detection
+      operationId: detectImage
+      summary: Detect whether an image is AI-generated
+      description: Send EITHER a multipart file upload OR a JSON body containing a public image URL. Provide exactly one of `image` or `imageUrl` per request. A successful detection costs 1 credit.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image file to analyze. JPG, PNG or WebP, up to 8 MB.
+              additionalProperties: false
+          application/json:
+            schema:
+              type: object
+              required:
+              - imageUrl
+              properties:
+                imageUrl:
+                  type: string
+                  format: uri
+                  description: Publicly reachable HTTP/HTTPS URL of the image.
+                  examples:
+                  - https://example.com/photo.jpg
+              additionalProperties: false
+      responses:
+        '200':
+          description: Detection result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectionResult'
+              examples:
+                likelyAi:
+                  summary: Published example response
+                  value:
+                    verdict: likely_ai
+                    ai_score: 0.87
+                    confidence: high
+                    source_breakdown: []
+        '400':
+          description: bad_request — Missing or invalid image, URL, or format.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                badRequest:
+                  value:
+                    error: bad_request
+                    message: Missing or invalid image, URL, or format
+        '401':
+          description: unauthorized — Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                unauthorized:
+                  summary: Body observed on a live anonymous probe, 2026-08-11
+                  value:
+                    error: unauthorized
+                    message: Missing API key
+        '402':
+          description: insufficient_credits — Out of credits; upgrade your plan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                insufficientCredits:
+                  summary: Published example error body
+                  value:
+                    error: insufficient_credits
+                    message: Insufficient credits
+        '403':
+          description: paid_plan_required — API access requires a paid plan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                paidPlanRequired:
+                  value:
+                    error: paid_plan_required
+                    message: API access requires a paid plan
+        '429':
+          description: too_many_requests — Rate limit exceeded (1 request per second per API key). Retry after the number of seconds given in the Retry-After header.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              schema:
+                type: integer
+              example: 1
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                tooManyRequests:
+                  value:
+                    error: too_many_requests
+                    message: Rate limit exceeded
+        '500':
+          description: detection_failed — Unexpected provider error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                detectionFailed:
+                  value:
+                    error: detection_failed
+                    message: Unexpected provider error
+        '503':
+          description: unavailable — Detection provider not configured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                unavailable:
+                  value:
+                    error: unavailable
+                    message: Detection provider not configured
+      x-credit-cost: 1
+      x-evidence:
+        probed: '2026-08-11'
+        url: https://imagedetector.online/v1/image/detect
+        method: POST
+        request: 'application/json {"imageUrl": "https://example.com/photo.jpg"} with no credentials'
+        http_status: 401
+        content_type: application/json
+        body: '{"error":"unauthorized","message":"Missing API key"}'
+        note: The live unauthenticated response matches the documented 401 envelope exactly, which confirms the endpoint, the base URL and the error shape recorded here.
+components:
+  schemas:
+    Error:
+      type: object
+      title: Error
+      description: Errors return a JSON body with a machine-readable `error` code, a human-readable `message`, and a standard HTTP status. This is NOT RFC 9457 application/problem+json.
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - bad_request
+          - unauthorized
+          - insufficient_credits
+          - paid_plan_required
+          - too_many_requests
+          - detection_failed
+          - unavailable
+        message:
+          type: string
+          description: Human-readable message.
+      additionalProperties: false
+    DetectionResult:
+      type: object
+      title: DetectionResult
+      description: The result of a single image detection.
+      required:
+      - verdict
+      - ai_score
+      - confidence
+      - source_breakdown
+      properties:
+        verdict:
+          type: string
+          description: Classification result.
+          enum:
+          - likely_ai
+          - likely_human
+          - uncertain
+        ai_score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Probability the image is AI-generated, from 0 to 1.
+        confidence:
+          type: string
+          description: Certainty level of the detection.
+          enum:
+          - low
+          - medium
+          - high
+        source_breakdown:
+          type: array
+          description: Reserved for future per-generator scores; currently always an empty array.
+          items: {}
+      additionalProperties: false
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authorization: Bearer sk_your_api_key. API keys are created in Settings -> API Keys and are shown only once at creation. Provide either this or the x-api-key header, not both.'
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: 'x-api-key: sk_your_api_key — alternative to the Authorization header. Provide one of the two.'
