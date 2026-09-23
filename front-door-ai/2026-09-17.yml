@@ -1,0 +1,25 @@
+# Front Door AI Index — anyimagedetector — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: anyimagedetector
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.imagedetector.online
+  final_host: imagedetector.online
+  ownership: own
+  owner: anyimagedetector
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 55
+  host_score: 55
+  density: 34.08
+  words: 1614
+  tiers:
+    agentic: 0
+    core: 55
+    model: 0
+  ambiguous: 0
+  top_terms:
+    AI: 55

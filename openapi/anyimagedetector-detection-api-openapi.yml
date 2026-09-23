@@ -3,13 +3,7 @@ info:
   title: AI Image Detector Detection API
   version: v1
   summary: Single-endpoint REST API that reports whether an image is AI-generated.
-  description: 'The AI Image Detector API exposes a single endpoint that reports whether an image is AI-generated. It returns a verdict, a probability score (0-1), a confidence label, and a per-generator breakdown field that is reserved for future use.
-
-
-    PROVENANCE — READ THIS FIRST. AnyImageDetector (imagedetector.online) publishes NO OpenAPI, Swagger, GraphQL, AsyncAPI or Postman artifact. This document is TRANSCRIBED, not harvested. Every path, header, parameter, constraint, response field, enum value, error code and rate limit below is copied verbatim from the provider''s own published API reference at https://imagedetector.online/docs (page states "Last updated: 2026-07-16") and the API overview at https://imagedetector.online/api. Nothing is inferred or invented. The single operation was additionally probed live and anonymously on 2026-08-11; the observed status and body are recorded in `x-evidence` on the operation.
-
-
-    ACCESS: a paid plan is required. API keys are created in Settings -> API Keys and are only shown once at creation. Free accounts and unauthenticated guests cannot create API keys or call /v1 endpoints. Each successful detection costs 1 credit, drawn from the same balance as the web tool.'
+  description: The AI Image Detector API exposes a single endpoint that reports whether an image is AI-generated.
   contact:
     name: AnyImageDetector Support
     email: support@imagedetector.online
