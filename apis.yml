@@ -47,7 +47,7 @@ specificationVersion: '0.23'
 tags:
   - AI image detection
   - Image Analysis
-  - Computer-Vision
+  - Computer Vision
   - Content Moderation
   - Trust and Safety
   - Fact Checking
@@ -66,6 +66,7 @@ tags_raw:
   - developer tools
   - synthetic media
   - fraud prevention
+  - Computer-Vision
 apis:
 - aid: anyimagedetector:anyimagedetector-detection-api
   name: AnyImageDetector Detection API
