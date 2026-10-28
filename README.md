@@ -1,4 +1,4 @@
-# AnyImageDetector (anyimagedetector)
+# AnyImageDetector
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,86 +66,113 @@
 
 AnyImageDetector (imagedetector.online) is a single-purpose AI-image-detection service for individuals, trust-and-safety reviewers, journalists and developers. Its AI Image Detector API exposes one REST endpoint, POST /v1/image/detect, that accepts a JPG/PNG/WebP file up to 8 MB or a public image URL and returns a verdict (likely_ai, likely_human or uncertain), an ai_score from 0 to 1, a confidence label, and a source_breakdown array reserved for future per-generator scores. The provider publishes the exact score bands that map ai_score to verdict and confidence, and deliberately declines to publish a single accuracy percentage, stating that one number would hide differences between generators, image styles, resolutions and editing conditions. Authentication is a static sk_ API key sent as a Bearer token or an x-api-key header; API access requires a paid plan and each successful detection consumes one credit from the same balance as the web tool. Requests are limited to one per second per key, with Retry-After returned on 429.
 
-**APIs.json:** [https://anyimagedetector.apievangelist.com/apis.yml](https://anyimagedetector.apievangelist.com/apis.yml)
+**Areas:** AI image detection · Image Analysis · Computer Vision · Content Moderation · Trust and Safety · Fact Checking · media verification · Developer Tools · Synthetic Media · Fraud Prevention
 
-## Tags
+## AnyImageDetector on APIs.io
 
-- AI image detection
-- image analysis
-- computer vision
-- content moderation
-- trust & safety
-- fact-checking
-- media verification
-- developer tools
-- synthetic media
-- fraud prevention
+Everything profiled for AnyImageDetector is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/anyimagedetector/](https://apis.io/providers/anyimagedetector/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (1)
 
-- **Created:** 2026-08-11
-- **Modified:** 2026-08-11
+- [AnyImageDetector Detection API](https://apis.io/apis/anyimagedetector/anyimagedetector-detection-api/) — Analyze an image and report whether it is AI-generated.
 
-## APIs
+### Published properties
 
-### AI Image Detector API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-REST API with a single endpoint (POST /v1/image/detect) that detects whether an image is AI-generated. Accepts a multipart file upload (JPG, PNG or WebP, up to 8 MB) or a JSON body with a public image URL, and returns verdict, ai_score, confidence, and source_breakdown. Requires a paid account and Bearer/x-api-key authentication; one credit per successful detection; one request per second per API key.
+#### MCP servers (1)
 
-- **Human URL:** [https://imagedetector.online/api](https://imagedetector.online/api)
-- **Base URL:** `https://imagedetector.online/v1`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [anyimagedetector-mcp.yml](https://apis.io/servers/anyimagedetector/anyimagedetector-mcp-yml/)
 
-- AI image detection
-- image analysis
-- computer vision
-- content moderation
-- trust & safety
-- fact-checking
-- media verification
-- developer tools
+#### Collections (1)
 
-#### Properties
+Postman and Open Collection request collections.
 
+- [AI Image Detector API](https://apis.io/collections/anyimagedetector/open-anyimagedetector-ai-image-detector/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Anyimagedetector Authentication](https://apis.io/security/anyimagedetector/anyimagedetector-authentication/)
+- [Anyimagedetector Domain Security](https://apis.io/security/anyimagedetector/anyimagedetector-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Anyimagedetector Plans Pricing](https://apis.io/plans/anyimagedetector/anyimagedetector-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Anyimagedetector Rate Limits](https://apis.io/rate-limits/anyimagedetector/anyimagedetector-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.imagedetector.online/)
 - [Documentation](https://imagedetector.online/docs)
-- [API Reference](https://imagedetector.online/docs)
-- [OpenAPI](openapi/anyimagedetector-ai-image-detector-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/anyimagedetector-ai-image-detector.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/anyimagedetector-ai-image-detector.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Data Model](data-model/anyimagedetector-data-model.yml)
-- [Error Catalog](errors/anyimagedetector-problem-types.yml)
-
-## Common Properties
-
-- [M C P Server](mcp/anyimagedetector-mcp.yml)
-- [Domain Security](security/anyimagedetector-domain-security.yml)
-- [Developer Portal](https://imagedetector.online/api)
-- [Documentation](https://imagedetector.online/docs)
-- [API Reference](https://imagedetector.online/docs)
-- [Support](mailto:support@imagedetector.online)
-- [Blog](https://imagedetector.online/blog)
+- [API reference](https://imagedetector.online/docs)
 - [Pricing](https://imagedetector.online/pricing)
-- [Sign Up](https://imagedetector.online/sign-up)
-- [Login](https://imagedetector.online/sign-in)
-- [Terms of Service](https://imagedetector.online/terms-of-service)
-- [Privacy Policy](https://imagedetector.online/privacy-policy)
-- [Methodology](https://imagedetector.online/methodology)
-- [Limitations](https://imagedetector.online/accuracy-and-limitations)
-- [About](https://imagedetector.online/about)
-- [L L Ms Txt](llms/anyimagedetector-llms.txt)
-- [Authentication](authentication/anyimagedetector-authentication.yml)
-- [Error Catalog](errors/anyimagedetector-problem-types.yml)
-- [Rate Limits](rate-limits/anyimagedetector-rate-limits.yml)
-- [Plans](plans/anyimagedetector-plans-pricing.yml)
-- [Conventions](conventions/anyimagedetector-conventions.yml)
-- [Lifecycle](lifecycle/anyimagedetector-lifecycle.yml)
-- [Conformance](conformance/anyimagedetector-conformance.yml)
-- [Data Model](data-model/anyimagedetector-data-model.yml)
-- [Agent Skill](skills/_index.yml)
+- [Sign up](https://imagedetector.online/sign-up)
+- [Blog](https://imagedetector.online/blog)
+- [Terms of service](https://imagedetector.online/terms-of-service)
+- [Privacy policy](https://imagedetector.online/privacy-policy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** imagedetector.online
-**Email:** support@imagedetector.online
-**URL:** https://imagedetector.online
+**Kin Score 39.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 15.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 76.3 |
+
+**Agent readiness 32.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.7** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/anyimagedetector/](https://apis.io/providers/anyimagedetector/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AnyImageDetector: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/anyimagedetector/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
